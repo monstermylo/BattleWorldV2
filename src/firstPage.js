@@ -26,7 +26,7 @@ class firstPage extends Phaser.Scene {
                 var cardPic = x.toString();
                 var url = 'assets/cards/Captain_Marvel.png';
             }
-            newCard = {key:cardPic,name:"card"+x,atk: Math.floor(Math.random() * Math.floor(5))+1,hp: Math.floor(Math.random() * Math.floor(15))+1, url:url};
+            newCard = {keyID:cardPic,name:"card"+x,atk: Math.floor(Math.random() * Math.floor(5))+1,hp: Math.floor(Math.random() * Math.floor(15))+1, url:url};
             userDeck.push(newCard);
         }
         
@@ -69,12 +69,12 @@ class firstPage extends Phaser.Scene {
         for (x = 0; x < y; x++) {
 
             //name of card in owned row
-            this.text2 = this.add.text(screenWidth * (4 / 5) + (x * 150) - 70, screenHeight * (3.9 / 5) * (3 / scaleRatio), userDeck[x].key, {
+            this.text2 = this.add.text(screenWidth * (4 / 5) + (x * 150) - 70, screenHeight * (3.9 / 5) * (3 / scaleRatio), userDeck[x].keyID, {
                 font: "40px Impact"
             });
 
             //adds card cards in owned row
-            card[x] = this.add.image(screenWidth * (4 / 5) + (x * 150), screenHeight * (4.5 / 5) * (3 / scaleRatio), userDeck[x].key).setInteractive();
+            card[x] = this.add.image(screenWidth * (4 / 5) + (x * 150), screenHeight * (4.5 / 5) * (3 / scaleRatio), userDeck[x].keyID).setInteractive();
 
             currentCard = card[x];
 

@@ -31,7 +31,7 @@ class deckset extends Phaser.Scene {
         this.load.image('menu', 'assets/menu.png');
         this.load.image('story', 'assets/story.png');
 
-
+        console.log(userOwned);
     }
 
     create() {
@@ -50,7 +50,7 @@ class deckset extends Phaser.Scene {
         var card = new Array();
         var currentCard = new Array();
         var newCard = new Array();
-
+        console.log(userOwned);
         var userOwned = Array();
         
         console.log("userowned");
@@ -77,15 +77,15 @@ class deckset extends Phaser.Scene {
         for (x = 0; x < y; x++) {
 
             //name of card in owned row
-            this.text2 = this.add.text(screenWidth * (4 / 5) + (x * 70) - 70, screenHeight * (3.9 / 5) * (3 / scaleRatio), userOwned[x].key, {
+            this.text2 = this.add.text(screenWidth * (4 / 5) + (x * 70) - 70, screenHeight * (3.9 / 5) * (3 / scaleRatio), userOwned[x].keyID, {
                 font: "40px Impact"
             });
 
             //adds card cards in owned row
-            card[x] = this.add.image(screenWidth * (4 / 5) + (x * 70), screenHeight * (4.5 / 5) * (3 / scaleRatio), userOwned[x].key).setInteractive();
+            card[x] = this.add.image(screenWidth * (4 / 5) + (x * 70), screenHeight * (4.5 / 5) * (3 / scaleRatio), userOwned[x].keyID).setInteractive();
 
             currentCard = card[x];
-
+            
         }
 
         var x = 0;
@@ -94,15 +94,16 @@ class deckset extends Phaser.Scene {
         console.log(userdeck);
         for (x = 0; x < y; x++) {
             //console.log(x);
-            this.text2 = this.add.text(screenWidth * (4 / 5) + (x * 70) - 70, screenHeight * (2.9 / 5) * (3 / scaleRatio), userdeck[x].key, {
+            this.text2 = this.add.text(screenWidth * (4 / 5) + (x * 70) - 70, screenHeight * (2.9 / 5) * (3 / scaleRatio), userdeck[x].keyID, {
                 font: "40px Impact"
             });
 
             //console.log(scaleRatio);
 
-            card[x] = this.add.image(screenWidth * (4 / 5) + (x * 70), screenHeight * (3.5 / 5) * (3 / scaleRatio), userdeck[x].key).setInteractive();
+            card[x] = this.add.image(screenWidth * (4 / 5) + (x * 70), screenHeight * (3.5 / 5) * (3 / scaleRatio), userdeck[x].keyID).setInteractive();
 
             currentCard = card[x];
+            
             //console.log(currentCard);
         }
 
@@ -122,9 +123,10 @@ class deckset extends Phaser.Scene {
                 console.log(userOwned);
                 var newcard = new Array();
                 for (var x = 0; x < userOwned.length; x++){
-                    if (userOwned[x].key = parseInt(key1, 10)){
+                    if (userOwned[x].keyID = parseInt(key1, 10)){
                         newcard = userOwned[x];
                         var cardKey = x;
+                        
                     }
                 }
                 console.log(userOwned);
@@ -142,7 +144,19 @@ class deckset extends Phaser.Scene {
                     
                     //userdeck.push(newCard);
                     console.log(userdeck);
-                    userOwned.splice(cardKey, 1);
+                    //userOwned.splice(cardKey, 1);
+                    var userOwned1 = new Array();
+                    for (var x = 0; x < userOwned.length; x++){
+                        console.log(userOwned[x].keyID);
+                        console.log(userdeck[0].keyID);
+                        if (userOwned[x].keyID != userdeck[0].keyID){
+                            userOwned1.push(userOwned[x]);
+                            console.log(userOwned1);
+                        }
+                    }
+                    
+                    userOwned = userOwned1;                    
+                    
                     console.log("userowned");
                     console.log(userOwned);
                     localStorage.setItem("ownedCards", JSON.stringify(userOwned));
@@ -195,6 +209,7 @@ class deckset extends Phaser.Scene {
                 console.log(x);
                 console.log(deckCard);
                 userOwned.push(deckCard);
+                console.log(userOwned);
             }
 
             console.log("userowned");
