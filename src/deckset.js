@@ -25,7 +25,7 @@ class deckset extends Phaser.Scene {
         var x;
         var y = userOwned.length;
         for (x = 0; x < y; x++) {
-            this.load.image(x.toString(), userOwned[x].url);
+            this.load.image(userOwned[x].name, userOwned[x].url);
         }
 
         this.load.image('menu', 'assets/menu.png');
@@ -52,10 +52,10 @@ class deckset extends Phaser.Scene {
         var newCard = new Array();
         console.log(userOwned);
         var userOwned = Array();
-        
+
         console.log("userowned");
         console.log(userOwned);
-        
+
         userOwned = localStorage.getItem("ownedCards");
         userOwned = JSON.parse(userOwned);
         console.log("userowned");
@@ -75,18 +75,21 @@ class deckset extends Phaser.Scene {
         var x;
         var y = userOwned.length;
         for (x = 0; x < y; x++) {
-
+            console.log(userOwned[x].name);
             //name of card in owned row
-            this.text2 = this.add.text(screenWidth * (4 / 5) + (x * 70) - 70, screenHeight * (3.9 / 5) * (3 / scaleRatio), userOwned[x].keyID, {
+            this.text2 = this.add.text(screenWidth * (4 / 5) + (x * 70) - 70, screenHeight * (3.9 / 5) * (3 / scaleRatio), userOwned[x].name, {
                 font: "40px Impact"
             });
 
             //adds card cards in owned row
-            card[x] = this.add.image(screenWidth * (4 / 5) + (x * 70), screenHeight * (4.5 / 5) * (3 / scaleRatio), userOwned[x].keyID).setInteractive();
+            card[x] = this.add.image(screenWidth * (4 / 5) + (x * 70), screenHeight * (4.5 / 5) * (3 / scaleRatio), userOwned[x].name).setInteractive();
 
             currentCard = card[x];
-            
+
         }
+
+        console.log("userowned");
+        console.log(userOwned);
 
         var x = 0;
         var y = userdeck.length;
@@ -94,69 +97,80 @@ class deckset extends Phaser.Scene {
         console.log(userdeck);
         for (x = 0; x < y; x++) {
             //console.log(x);
-            this.text2 = this.add.text(screenWidth * (4 / 5) + (x * 70) - 70, screenHeight * (2.9 / 5) * (3 / scaleRatio), userdeck[x].keyID, {
+            this.text2 = this.add.text(screenWidth * (4 / 5) + (x * 70) - 70, screenHeight * (2.9 / 5) * (3 / scaleRatio), userdeck[x].name, {
                 font: "40px Impact"
             });
 
             //console.log(scaleRatio);
 
-            card[x] = this.add.image(screenWidth * (4 / 5) + (x * 70), screenHeight * (3.5 / 5) * (3 / scaleRatio), userdeck[x].keyID).setInteractive();
+            card[x] = this.add.image(screenWidth * (4 / 5) + (x * 70), screenHeight * (3.5 / 5) * (3 / scaleRatio), userdeck[x].name).setInteractive();
 
             currentCard = card[x];
-            
+
             //console.log(currentCard);
         }
 
-        this.input.on('gameobjectdown', function (pointer, gameObject) {
-            console.log(userOwned);
-            var key1 = gameObject.texture.key;
-            console.log(key1);
-            console.log(parseInt(key1, 10));
+        console.log("userowned");
+        console.log(userOwned);
 
-            if (parseInt(key1, 10) != null) {
+        this.input.on('gameobjectdown', function (pointer, gameObject) {
+
+            var userOwned2 = Array();
+            userOwned2 = localStorage.getItem("ownedCards");
+            userOwned2 = JSON.parse(userOwned2);
+            console.log("userowned");
+            console.log(userOwned2);
+
+            var key1 = gameObject.texture.key;
+            var key2 = key1.slice(4);
+            console.log(key1);
+            console.log(key2);
+            console.log(parseInt(key2, 10));
+
+            if (parseInt(key2, 10) != null) {
                 console.log("not null");
             } else {
                 console.log("is null");
             }
-            console.log(userOwned);
-            if (!isNaN(parseInt(key1, 10))) {
-                console.log(userOwned);
+            console.log(userOwned2);
+            if (!isNaN(parseInt(key2, 10))) {
+                console.log(userOwned2);
                 var newcard = new Array();
-                for (var x = 0; x < userOwned.length; x++){
-                    if (userOwned[x].keyID = parseInt(key1, 10)){
-                        newcard = userOwned[x];
+                for (var x = 0; x < userOwned2.length; x++) {
+                    if (userOwned2[x].name = key1) {
+                        newcard = userOwned2[x];
                         var cardKey = x;
-                        
+
                     }
                 }
-                console.log(userOwned);
+                console.log(userOwned2);
                 //console.log(newCard);
                 console.log(userdeck);
                 console.log(userdeck.length);
                 if (userdeck.length < 10 || !userdeck.length) {
                     console.log(newcard);
-                    console.log(userOwned);
-                    if (userdeck === []){
+                    console.log(userOwned2);
+                    if (userdeck === []) {
                         userdeck = newcard;
                     } else {
                         userdeck.push(newcard);
                     }
-                    
+
                     //userdeck.push(newCard);
                     console.log(userdeck);
                     //userOwned.splice(cardKey, 1);
                     var userOwned1 = new Array();
-                    for (var x = 0; x < userOwned.length; x++){
-                        console.log(userOwned[x].keyID);
-                        console.log(userdeck[0].keyID);
-                        if (userOwned[x].keyID != userdeck[0].keyID){
-                            userOwned1.push(userOwned[x]);
+                    for (var x = 0; x < userOwned2.length; x++) {
+                        console.log(userOwned2[x].name);
+                        console.log(userdeck[0].name);
+                        if (userOwned2[x].name != newcard.name) {
+                            userOwned1.push(userOwned2[x]);
                             console.log(userOwned1);
                         }
                     }
-                    
-                    userOwned = userOwned1;                    
-                    
+
+                    userOwned = userOwned1;
+
                     console.log("userowned");
                     console.log(userOwned);
                     localStorage.setItem("ownedCards", JSON.stringify(userOwned));
@@ -164,6 +178,7 @@ class deckset extends Phaser.Scene {
                     console.log(userdeck);
                     localStorage.setItem("userDeck", JSON.stringify(userdeck));
 
+                    console.log("reload");
                     this.scene.start("deckset");
 
                 } else {
