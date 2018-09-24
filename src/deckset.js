@@ -19,10 +19,7 @@ class deckset extends Phaser.Scene {
         var userOwned = Array();
         var userOwned = cardAccessI.getOwnedPublic();
 
-
-        var x;
-        var y = userOwned.length;
-        for (x = 0; x < y; x++) {
+        for (var x = 0; x < userOwned.length; x++) {
             this.load.image(userOwned[x].name, userOwned[x].url);
         }
 
@@ -32,21 +29,23 @@ class deckset extends Phaser.Scene {
 
     create() {
         var cardAccessI = cardAccess.getInstance();
+        
         this.text = this.add.text(0, 0, "deckset", {
             font: "40px Impact"
         });
+        
         var scaleRatio = window.devicePixelRatio / 3;
+        
         setBackground('menu', this);
+        
         var screenWidth = getWidth();
         var screenHeight = getHeight();
+        
         this.story = this.add.image(400, 300, 'story').setScale(0.2).setInteractive();
+        
         this.story.on('pointerdown', function (event) {
             this.scene.start("match");
         }, this);
-
-        var card = new Array();
-        var currentCard = new Array();
-        var newCard = new Array();
 
         var userOwned = Array();
         userOwned = cardAccessI.getOwnedPublic();
@@ -59,9 +58,7 @@ class deckset extends Phaser.Scene {
             userdeck = [];
         }
 
-        var x;
-        var y = userOwned.length;
-        for (x = 0; x < y; x++) {
+        for (var x = 0; x < userOwned.length; x++) {
 
             //name of card in owned row
             this.text2 = this.add.text(screenWidth * (4 / 5) + (x * 70) - 70, screenHeight * (3.9 / 5) * (3 / scaleRatio), userOwned[x].name, {
@@ -69,26 +66,19 @@ class deckset extends Phaser.Scene {
             });
 
             //adds card cards in owned row
-            card[x] = this.add.image(screenWidth * (4 / 5) + (x * 70), screenHeight * (4.5 / 5) * (3 / scaleRatio), userOwned[x].name).setInteractive();
+            this.add.image(screenWidth * (4 / 5) + (x * 70), screenHeight * (4.5 / 5) * (3 / scaleRatio), userOwned[x].name).setInteractive();
 
-            currentCard = card[x];
 
         }
 
 
-
-        var x = 0;
-        var y = userdeck.length;
-
-        for (x = 0; x < y; x++) {
+        for (var x = 0; x < userdeck.length; x++) {
             //console.log(x);
             this.text2 = this.add.text(screenWidth * (4 / 5) + (x * 70) - 70, screenHeight * (2.9 / 5) * (3 / scaleRatio), userdeck[x].name, {
                 font: "40px Impact"
             });
 
-            card[x] = this.add.image(screenWidth * (4 / 5) + (x * 70), screenHeight * (3.5 / 5) * (3 / scaleRatio), userdeck[x].name).setInteractive();
-
-            currentCard = card[x];
+            this.add.image(screenWidth * (4 / 5) + (x * 70), screenHeight * (3.5 / 5) * (3 / scaleRatio), userdeck[x].name).setInteractive();
 
         }
 
@@ -173,9 +163,7 @@ class deckset extends Phaser.Scene {
 
             var deckCard = new Array();
 
-            var deckLength = userdeck.length;
-            var x = 0;
-            for (x = 0; x < deckLength; x++) {
+            for (var x = 0; x < userdeck.length; x++) {
                 deckCard = userdeck[x]
                 userOwned.push(deckCard);
             }
