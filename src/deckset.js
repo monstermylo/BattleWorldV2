@@ -114,7 +114,9 @@ class deckset extends Phaser.Scene {
         console.log(userOwned);
 
         this.input.on('gameobjectdown', function (pointer, gameObject) {
-
+            var cardAccessI = cardAccess.getInstance();
+            console.log(cardAccessI);
+            cardAccessI.getOwnedPublic();
             var userOwned2 = Array();
             userOwned2 = localStorage.getItem("ownedCards");
             userOwned2 = JSON.parse(userOwned2);
