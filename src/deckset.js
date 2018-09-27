@@ -101,7 +101,7 @@ class deckset extends Phaser.Scene {
 
                 var newcard = new Array();
                 for (var x = 0; x < userOwned.length; x++) {
-                    if (userOwned[x].name = key1) {
+                    if (userOwned[x].name == key1) {
                         newcard = userOwned[x];
                         var cardKey = x;
 
