@@ -10,7 +10,7 @@ class deckset extends Phaser.Scene {
     preload() {
         var cardAccessI = cardAccess.getInstance();
         var userdeck = Array();
-        userdeck = cardAccessI.getUserDeck("userDeck");
+        userdeck = cardAccessI.getUserDeck();
 
         if (userdeck == null) {
             userdeck = {};
@@ -23,6 +23,9 @@ class deckset extends Phaser.Scene {
             this.load.image(userOwned[x].name, userOwned[x].url);
         }
 
+        for (var x = 0; x < userdeck.length; x++) {
+            this.load.image(userdeck[x].name, userdeck[x].url);
+        }
         this.load.image('menu', 'assets/menu.png');
         this.load.image('story', 'assets/story.png');
     }
@@ -155,7 +158,7 @@ class deckset extends Phaser.Scene {
             var userOwned = cardAccessI.getOwnedPublic();
 
             var userdeck = Array();
-            userdeck = cardAccessI.getUserDeck("userDeck");
+            userdeck = cardAccessI.getUserDeck();
 
             if (userdeck == null) {
                 userdeck = new Array();
