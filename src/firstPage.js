@@ -18,13 +18,16 @@ class firstPage extends Phaser.Scene {
         var newCard = new Array ();
         var x;
         for (x = 0; x < 10; x++){
-            var type = (Math.random() * 2);
+            var type = (Math.random() * 3);
             if (type < 1){
                 var cardPic = x.toString();
                 var url = 'assets/cards/Miles_Morales.png';
-            } else {
+            } else if (type > 1 && type < 2) {
                 var cardPic = x.toString();
                 var url = 'assets/cards/Captain_Marvel.png';
+            } else {
+                var cardPic = x.toString();
+                var url = 'assets/cards/Young_Thor.png';
             }
             newCard = {keyID:cardPic,name:"card"+x,atk: Math.floor(Math.random() * Math.floor(5))+1,hp: Math.floor(Math.random() * Math.floor(15))+1, url:url};
             userDeck.push(newCard);
