@@ -1,90 +1,106 @@
 class match extends Phaser.Scene {
     constructor() {
-        super({key:"match"});
+        super({
+            key: "match"
+        });
     }
-    
-    
-    
-    preload(){
+
+
+
+    preload() {
+        var cardAccessI = cardAccess.getInstance();
+        var gamedeck = Array();
         var userdeck = Array();
-        userdeck = localStorage.getItem("userDeck");
-        console.log("userdeck");
-        if (userdeck == null || []) {
-            userdeck = new Array();
-        }
-        console.log(userdeck);
-        var x;
-        var y = userdeck.length;
-        for (x = 0; x < y; x++) {
-            this.load.image(x.toString(), userdeck[x][4]);
+        userdeck = cardAccessI.getUserDeck();
+        gamedeck.push(...userdeck);
+
+        console.log("gamedeck");
+
+        console.log(gamedeck);
+
+        for (var x = 0; x < gamedeck.length; x++) {
+            this.load.image(gamedeck[x].keyID, gamedeck[x].url);
         }
         this.load.image('menu', 'assets/menu.png');
-        //this.load.image('MM', 'assets/cards/Miles_Morales.png');
-        //this.load.image('CM', 'assets/cards/Captain_Marvel.png');
-        
+
+        var characterAccessI = characterAccess.getInstance();
+        var character = new Array ();
+        character = characterAccessI.getChosenCharacterPublic();
+        console.log(character);
+        this.load.image(character.name,character.url);
     }
-    
-    create(){
+
+    create() {
+        
+        
+        
+        
+        
+        var cardAccessI = cardAccess.getInstance();
         var scaleRatio = window.devicePixelRatio / 3;
         setBackground('menu', this);
-        this.text = this.add.text(0,0, "match", {font: "40px Impact"});
+        this.text = this.add.text(0, 0, "match", {
+            font: "40px Impact"
+        });
 
         var screenWidth = getWidth();
         var screenHeight = getHeight();
+
         
-        var card = new Array ();    
-        var userDeck = new Array ();
-        var newCard = new Array ();
-        var currentCard = new Array ();
-        var hand = new Array ()
+        var characterAccessI = characterAccess.getInstance();
+        var character = new Array ();
+        character = characterAccessI.getCharacterPublic();
         
-        var userdeck = Array();
-        userdeck = localStorage.getItem("userDeck");
-        console.log("userdeck");
-        if (userdeck == null || []) {
-            userdeck = new Array();
-        }
+        this.add.image(screenWidth * (7 / 5), screenHeight * (2.5 / 5) * (3 / scaleRatio), character.name);
         
-        shuffle(userDeck);
-        
-        console.log(userDeck);
-        
+        var card = new Array();
+        var gamedeck = new Array();
+        var newCard = new Array();
+        var currentCard = new Array();
+        var hand = new Array()
+
+        var gamedeck = Array();
+        gamedeck = cardAccessI.getUserDeck();
+        console.log("gamedeck");
+        console.log(gamedeck);
+        //if (gamedeck == null || []) {
+        //    gamedeck = new Array();
+        //}
+
+        shuffle(gamedeck);
+
+        console.log(gamedeck);
+
         var cardNo;
-        
-        for (cardNo = 0; cardNo < 5; cardNo++){
+
+        for (cardNo = 0; cardNo < 5; cardNo++) {
             console.log(cardNo);
-            this.text2 = this.add.text( screenWidth* (4/5)+ (cardNo * 200), screenHeight * (3.9/5) * (3/scaleRatio), userDeck[cardNo][0], {font: "40px Impact"});
-            
+            this.text2 = this.add.text(screenWidth * (4 / 5) + (cardNo * 200), screenHeight * (3.9 / 5) * (3 / scaleRatio), gamedeck[cardNo].keyID, {
+                font: "40px Impact"
+            });
+
             console.log(scaleRatio);
-            
-            card[cardNo] = this.add.image(screenWidth * (4/5) + (cardNo * 200), screenHeight * (4.5/5) * (3/scaleRatio) , userDeck[cardNo][0]).setInteractive();
-            
+
+            this.add.image(screenWidth * (4 / 5) + (cardNo * 200), screenHeight * (4.5 / 5) * (3 / scaleRatio), gamedeck[cardNo].keyID).setInteractive();
+
             currentCard = card[cardNo];
             console.log(currentCard);
-        
-            
-            //currentCard.on('gameobjectdown', playCard(event,userDeck[cardNo]));
-            this.input.on('gameobjectdown', function (pointer,gameObject,currentCard){
-                      console.log(gameObject);
-                console.log(currentCard);
-                },this);
-            console.log("end");
-            
+
+
+
+
         }
-        
-        /*card.input.on('gameobjectdown', function (pointer,gameObject){
-                      console.log(gameObject);
-        },this);*/
-        
-        
-        function playCard(event, card){
-            console.log(card);
-            inPlayCard(card);
-        }
-        
+
+        this.input.on('gameobjectdown', function (pointer, gameObject, currentCard) {
+            console.log(gameObject);
+            console.log(currentCard);
+        }, this);
+        console.log("end");
+
+
     }
-    
-    update(){
-        //this.text = this.add.text( screenWidth, screenHeight, userDeck[0][0], {font: "40px Impact"})
+
+    update() {
+        //this.text = this.add.text( screenWidth, screenHeight, gamedeck[0][0], {font: "40px Impact"})
     }
 }

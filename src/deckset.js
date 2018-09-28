@@ -31,6 +31,16 @@ class deckset extends Phaser.Scene {
     }
 
     create() {
+        
+        var characterAccessI = characterAccess.getInstance();
+        var characters = new Array ();
+        var chosenCharacter = new Array ();
+        var characters = characterAccessI.getCharacterPublic();
+        
+        chosenCharacter = characters[0];
+        
+        characterAccessI.setChosenCharacterPublic(chosenCharacter);
+        
         var cardAccessI = cardAccess.getInstance();
         
         this.text = this.add.text(0, 0, "deckset", {
