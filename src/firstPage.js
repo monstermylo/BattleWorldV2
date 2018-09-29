@@ -111,6 +111,13 @@ class firstPage extends Phaser.Scene {
             card[x] = this.add.image(screenWidth * (4 / 5) + (x * 150), screenHeight * (4.5 / 5) * (3 / scaleRatio), userDeck[x].keyID).setInteractive();
 
             currentCard = card[x];
+            
+            this.atkText = this.add.text(screenWidth * (4 / 5) + (x * 150) - 70, screenHeight * (5.1 / 5) * (3 / scaleRatio), userDeck[x].atk, {
+                font: "40px Impact"
+            });
+            this.hpText = this.add.text(screenWidth * (4 / 5) + (x * 150) - 70, screenHeight * (5.3 / 5) * (3 / scaleRatio), userDeck[x].hp, {
+                font: "40px Impact"
+            });
 
         }
 

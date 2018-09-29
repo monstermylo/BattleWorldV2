@@ -74,12 +74,18 @@ class deckset extends Phaser.Scene {
         for (var x = 0; x < userOwned.length; x++) {
 
             //name of card in owned row
-            this.text2 = this.add.text(screenWidth * (4 / 5) + (x * 70) - 70, screenHeight * (3.9 / 5) * (3 / scaleRatio), userOwned[x].name, {
+            this.text2 = this.add.text(screenWidth * (4 / 5) + (x * 100) - 100, screenHeight * (3.9 / 5) * (3 / scaleRatio), userOwned[x].name, {
                 font: "40px Impact"
             });
 
             //adds card cards in owned row
-            this.add.image(screenWidth * (4 / 5) + (x * 70), screenHeight * (4.5 / 5) * (3 / scaleRatio), userOwned[x].name).setInteractive();
+            this.add.image(screenWidth * (4 / 5) + (x * 100), screenHeight * (4.5 / 5) * (3 / scaleRatio), userOwned[x].name).setInteractive();
+            this.atkText = this.add.text(screenWidth * (4 / 5) + (x * 100) - 100, screenHeight * (5.1 / 5) * (3 / scaleRatio), userOwned[x].atk, {
+                font: "40px Impact"
+            });
+            this.hpText = this.add.text(screenWidth * (4 / 5) + (x * 100) - 100, screenHeight * (5.3 / 5) * (3 / scaleRatio), userOwned[x].hp, {
+                font: "40px Impact"
+            });
 
 
         }
@@ -87,11 +93,18 @@ class deckset extends Phaser.Scene {
 
         for (var x = 0; x < userdeck.length; x++) {
             //console.log(x);
-            this.text2 = this.add.text(screenWidth * (4 / 5) + (x * 70) - 70, screenHeight * (2.9 / 5) * (3 / scaleRatio), userdeck[x].name, {
+            this.text2 = this.add.text(screenWidth * (4 / 5) + (x * 100) - 100, screenHeight * (1.9 / 5) * (3 / scaleRatio), userdeck[x].name, {
                 font: "40px Impact"
             });
 
-            this.add.image(screenWidth * (4 / 5) + (x * 70), screenHeight * (3.5 / 5) * (3 / scaleRatio), userdeck[x].name).setInteractive();
+            this.add.image(screenWidth * (4 / 5) + (x * 100), screenHeight * (2.5 / 5) * (3 / scaleRatio), userdeck[x].name).setInteractive();
+            
+            this.atkText = this.add.text(screenWidth * (4 / 5) + (x * 100) - 100, screenHeight * (3.1 / 5) * (3 / scaleRatio), userdeck[x].atk, {
+                font: "40px Impact"
+            });
+            this.hpText = this.add.text(screenWidth * (4 / 5) + (x * 100) - 100, screenHeight * (3.3 / 5) * (3 / scaleRatio), userdeck[x].hp, {
+                font: "40px Impact"
+            });
 
         }
 
@@ -161,7 +174,7 @@ class deckset extends Phaser.Scene {
 
     update() {
         var cardAccessI = cardAccess.getInstance();
-        this.clear = this.add.image(800, 300, 'story').setScale(0.2).setInteractive();
+        this.clear = this.add.image(1000, 300, 'story').setScale(0.2).setInteractive();
         this.clear.on('pointerdown', function (event) {
 
             var userOwned = Array();

@@ -32,13 +32,11 @@ class match extends Phaser.Scene {
 
     create() {
         
-        
-        
-        
-        
+
         var cardAccessI = cardAccess.getInstance();
         var scaleRatio = window.devicePixelRatio / 3;
         setBackground('menu', this);
+        
         this.text = this.add.text(0, 0, "match", {
             font: "40px Impact"
         });
@@ -51,7 +49,7 @@ class match extends Phaser.Scene {
         var character = new Array ();
         character = characterAccessI.getCharacterPublic();
         
-        this.add.image(screenWidth * (7 / 5), screenHeight * (2.5 / 5) * (3 / scaleRatio), character.name);
+        this.add.image(200, 200, character.name);
         
         var card = new Array();
         var gamedeck = new Array();
@@ -72,7 +70,7 @@ class match extends Phaser.Scene {
         console.log(gamedeck);
 
         var cardNo;
-
+        this.add.image(screenWidth * (4 / 5) , screenHeight * (0.9 / 5) * (3 / scaleRatio), character.name);
         for (cardNo = 0; cardNo < 5; cardNo++) {
             console.log(cardNo);
             this.text2 = this.add.text(screenWidth * (4 / 5) + (cardNo * 200), screenHeight * (3.9 / 5) * (3 / scaleRatio), gamedeck[cardNo].keyID, {
@@ -85,6 +83,13 @@ class match extends Phaser.Scene {
 
             currentCard = card[cardNo];
             console.log(currentCard);
+            
+            this.atkText = this.add.text(screenWidth * (4 / 5) + (cardNo * 200) - 100, screenHeight * (5.1 / 5) * (3 / scaleRatio), gamedeck[cardNo].atk, {
+                font: "40px Impact"
+            });
+            this.hpText = this.add.text(screenWidth * (4 / 5) + (cardNo * 200) - 100, screenHeight * (5.3 / 5) * (3 / scaleRatio), gamedeck[cardNo].hp, {
+                font: "40px Impact"
+            });
 
 
 
