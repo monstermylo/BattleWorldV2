@@ -47,9 +47,8 @@ class match extends Phaser.Scene {
         
         var characterAccessI = characterAccess.getInstance();
         var character = new Array ();
-        character = characterAccessI.getCharacterPublic();
+        character = characterAccessI.getChosenCharacterPublic();
         
-        this.add.image(200, 200, character.name);
         
         var card = new Array();
         var gamedeck = new Array();
@@ -68,9 +67,12 @@ class match extends Phaser.Scene {
         shuffle(gamedeck);
 
         console.log(gamedeck);
+        
+        console.log(character.name);
 
         var cardNo;
-        this.add.image(screenWidth * (4 / 5) , screenHeight * (0.9 / 5) * (3 / scaleRatio), character.name);
+        this.add.image(screenWidth * (14 / 5) , screenHeight * (4.5 / 5) * (3 / scaleRatio), character.name);
+        
         for (cardNo = 0; cardNo < 5; cardNo++) {
             console.log(cardNo);
             this.text2 = this.add.text(screenWidth * (4 / 5) + (cardNo * 200), screenHeight * (3.9 / 5) * (3 / scaleRatio), gamedeck[cardNo].keyID, {

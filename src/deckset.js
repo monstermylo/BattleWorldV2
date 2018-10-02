@@ -38,7 +38,7 @@ class deckset extends Phaser.Scene {
         var characters = characterAccessI.getCharacterPublic();
         
         chosenCharacter = characters[0];
-        
+        console.log(chosenCharacter);
         characterAccessI.setChosenCharacterPublic(chosenCharacter);
         
         var cardAccessI = cardAccess.getInstance();
